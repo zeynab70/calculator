@@ -1,0 +1,150 @@
+<html>
+    <head>
+        <style>
+            *,*:after,*:before{
+                box-sizing:border-box;
+            }
+            h3{
+                font-family: vazir;
+                font-weight: 800;
+            }
+            a{
+                text-decoration: none;
+            }
+            .container{
+                padding-top:40px;
+                width: 400px;
+                margin: 0 auto;
+            }
+            .calculator .holder{
+                background-color: #0e422a;
+                padding: 20px 5px 20px  5px;
+            }
+            .calculator #result-holder{
+                border:1px solid #adabab;
+                min-height: 60px;
+                padding: 10px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                font-size: 20px;
+                font-weight: bold;
+                color:#fff;
+                display: flex;
+                justify-content: space-between;
+            }
+            .calculator #result-holder .number-holder{
+                display: flex;
+                justify-content: center;
+                gap:20px;
+            }
+            .calculator .calculator-holder{
+                display:flex;
+                flex-wrap: wrap;
+            }
+            .calculator .calculator-holder div{
+                width:25%;
+                padding:5px 10px 0 10px;
+            }
+            .calculator .calculator-holder div button{
+                width:100%;
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 20px;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="calculator">
+            <div class="container">
+                <div class="holder">
+                    <div id="result-holder">
+                        <div class="number-holder">
+                            <div id="firstNumber"></div>
+                            <div id="operandElement"></div>
+                            <div id="secondNumber"></div>
+                        </div>
+                        <div id="result"></div>
+                    </div>
+                    <div class="calculator-holder">                   
+                        <div> <button id="number7" value="7"> 7 </button> </div>
+                        <div> <button id="number8" value="8"> 8 </button> </div>
+                        <div> <button id="number9" value="9"> 9 </button> </div>
+                        <div> <button id="equal"   value="="> = </button> </div>                  
+                        <div> <button id="number4" value="4"> 4 </button> </div>
+                        <div> <button id="number5" value="5"> 5 </button> </div>
+                        <div> <button id="number6" value="6"> 6 </button> </div>
+                        <div> <button id="mult"    value="*"> * </button> </div>
+                        <div> <button id="number1" value="1"> 1 </button> </div>
+                        <div> <button id="number2" value="2"> 2 </button> </div>
+                        <div> <button id="number3" value="3"> 3 </button> </div>
+                        <div> <button id="div"     value="/"> / </button> </div>
+                        <div> <button id="number0" value="0"> 0 </button> </div>
+                        <div> <button id="point"   value="."> . </button> </div>
+                        <div> <button id="add"     value="+"> + </button> </div>
+                        <div> <button id="sub"     value="-"> - </button> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            var firstNumber=  document.getElementById("firstNumber");
+            var operandElement=  document.getElementById("operandElement");
+            var secondNumber=  document.getElementById("secondNumber");
+            var result=  document.getElementById("result");
+            var number1= document.getElementById("number1").addEventListener("click", concat);
+            var number2= document.getElementById("number2").addEventListener("click", concat);
+            var number3= document.getElementById("number3").addEventListener("click", concat);
+            var number4= document.getElementById("number4").addEventListener("click", concat);
+            var number5= document.getElementById("number5").addEventListener("click", concat);
+            var number6= document.getElementById("number6").addEventListener("click", concat);
+            var number7= document.getElementById("number7").addEventListener("click", concat);
+            var number8= document.getElementById("number8").addEventListener("click", concat);
+            var number9= document.getElementById("number9").addEventListener("click", concat);
+            var point= document.getElementById("point").addEventListener("click", concat);
+            var addOperand= document.getElementById("add").addEventListener("click", concat);
+            var subOperand= document.getElementById("sub").addEventListener("click", concat);
+            var multOperand= document.getElementById("mult").addEventListener("click", concat);
+            var divOperand= document.getElementById("div").addEventListener("click", concat);
+            var equal= document.getElementById("equal").addEventListener("click", concat);
+            var templet="";
+                function concat(text){
+                    var firstElement;
+                    var secondElement;
+                    var operand;
+                    var locationOperand;
+                    if(text.target.value == "="){
+                        for (var i = 0; i < templet.length;i++) {
+                         if(templet[i]=== "+" || templet[i]=== "-" || templet[i]=== "*" || templet[i]=== "/")
+                         {
+                            locationOperand=i;
+                            break;
+                         }
+                        }
+                        firstElement = templet.slice(0, locationOperand);
+                        firstNumber.innerHTML=firstElement;
+                        secondElement = templet.slice(locationOperand+1, templet.length);
+                        secondNumber.innerHTML=secondElement;
+                        operand = templet[locationOperand];
+                        operandElement.innerHTML = operand;
+                        if(operand=== "+"){
+                            result.innerHTML=firstElement+secondElement;
+                        }
+                        else if(operand=== "-"){
+                            result.innerHTML=firstElement-secondElement;
+                        }
+                        else if(operand=== "*"){
+                            result.innerHTML=firstElement*secondElement;
+                        }
+                        else if(operand=== "/"){
+                            result.innerHTML=firstElement/secondElement;
+                        }
+                    }
+                    else{
+                        templet = templet+(text.target.value);
+                    }
+            }
+          
+        </script>
+    </body>
+</html>
